@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{ partial "hero.html" (dict "image" .Params.hero "lines" .Params.hero_lines "overlay" "#292047" "opacity" "0.4") }}
+<section class="section">
+  <div class="wrap">
+    <div class="prose">
+      <h2>{{ .Title }}</h2>
+      <div class="rule"></div>
+      {{ .Content }}
+    </div>
+    {{ range .Pages.ByWeight }}
+      {{ $name := .Title }}
+      <article class="honor">
+        <div class="honor__text">
+          <h2>{{ $name }}</h2>
+          <div class="prose">{{ .Content }}</div>
+        </div>
+        {{ with .Params.photo }}
+          <img src="{{ . }}" alt="{{ $name }}">
+        {{ end }}
+        {{ with .Params.certificate }}
+          <img src="{{ . }}" alt="Kunniakirja, {{ $name }}">
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

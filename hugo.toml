@@ -1,0 +1,23 @@
+baseURL = "https://www.arvary.fi/"
+locale = "fi"
+title = "ARVA ry"
+theme = "arva"
+disableKinds = ["taxonomy", "term"]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[[menus.main]]
+name = "Kunniakirjat"
+pageRef = "/kunniakirjat"
+weight = 1
+
+[[menus.main]]
+name = "Hankkeet"
+pageRef = "/hankkeet"
+weight = 2
+
+[[menus.main]]
+name = "Yhteys"
+pageRef = "/yhteys"
+weight = 3

@@ -1,0 +1,10 @@
+<div class="people-grid">
+  {{ range hugo.Data.board }}
+    <article class="person">
+      <h3>{{ .name }}</h3>
+      <p><strong>{{ .role }}</strong></p>
+      {{ with .phone }}<p>puh. {{ . }}</p>{{ end }}
+      {{ with .email }}<p>{{ . }}</p>{{ end }}
+    </article>
+  {{ end }}
+</div>

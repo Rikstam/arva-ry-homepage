@@ -1,0 +1,4 @@
+name = "ARVA"
+license = "MIT"
+description = "Theme for Arvokas vanhuus ARVA ry"
+min_version = "0.128.0"

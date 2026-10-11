@@ -1,0 +1,16 @@
+<section class="hero {{ .class }}"{{ with .image }} style="background-image: url('{{ . }}')"{{ end }}>
+  <div class="hero__overlay" style="background-color: {{ .overlay | default "#292047" }}; opacity: {{ .opacity | default "0.4" }}"></div>
+  <div class="wrap hero__content">
+    {{ with .lines }}
+      <h1>
+        {{ range $i, $line := . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}
+      </h1>
+    {{ end }}
+    {{ with .text }}
+      <p class="hero__text">{{ . }}</p>
+    {{ end }}
+    {{ with .button }}
+      <a class="btn {{ .class }}" href="{{ .url }}">{{ .text }}</a>
+    {{ end }}
+  </div>
+</section>

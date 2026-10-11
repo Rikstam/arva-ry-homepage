@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "hero.html" (dict "image" .Params.hero "lines" (slice .Title) "overlay" "#292047" "opacity" "0.4") }}
+<section class="section">
+  <div class="wrap card-grid">
+    {{ range .Pages.ByWeight }}
+      <article class="project-card">
+        <a href="{{ .Params.thumb_url | default .RelPermalink }}">
+          <img src="{{ .Params.thumbnail }}" alt="">
+        </a>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="prose">{{ .Params.blurb | markdownify }}</div>
+        {{ $page := . }}
+        {{ with .Params.more_url }}
+          <p><a class="more-link" href="{{ . }}">{{ $page.Params.more_label | default "LUE LISÄÄ" }}</a></p>
+        {{ else }}
+          <p><a class="more-link" href="{{ $page.RelPermalink }}"><strong>LUE LISÄÄ</strong></a></p>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

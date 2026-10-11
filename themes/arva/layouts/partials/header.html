@@ -1,0 +1,37 @@
+{{ $here := .RelPermalink }}
+{{ $logo := .Params.header_logo | default hugo.Data.site.logo }}
+<header class="site-header">
+  <div class="wrap header-bar">
+    <div class="brand">
+      {{ if .IsHome }}
+        <img src="{{ $logo }}" alt="Arvokas vanhuus ARVA ry">
+      {{ else }}
+        <a href="{{ "/" | relURL }}">
+          <img src="{{ $logo }}" alt="Arvokas vanhuus ARVA ry">
+        </a>
+      {{ end }}
+    </div>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+      <span class="visually-hidden">Valikko</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Päävalikko">
+      <ul>
+        {{ range site.Menus.main }}
+          {{ $url := .URL }}
+          {{ with .Page }}{{ $url = .RelPermalink }}{{ end }}
+          {{ $active := or (eq $here $url) (and (ne $url "/") (hasPrefix $here $url)) }}
+          <li>
+            <a href="{{ $url }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+    {{ if .IsHome }}
+      <a class="header-social" href="{{ hugo.Data.site.facebook }}" target="_blank" rel="noopener">
+        <span class="visually-hidden">Facebook</span>
+        {{ partial "icon.html" "facebook" }}
+      </a>
+    {{ end }}
+  </div>
+</header>

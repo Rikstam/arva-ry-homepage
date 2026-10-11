@@ -1,0 +1,6 @@
+<section class="band band--photo" style="background-image: url('{{ .Get "image" }}')">
+  <div class="band__overlay"></div>
+  <div class="wrap band__content">
+    {{ .Inner | markdownify }}
+  </div>
+</section>

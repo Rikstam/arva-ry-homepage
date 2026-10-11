@@ -1,0 +1,13 @@
+<div class="icon-grid">
+  {{ range .items }}
+    <article class="icon-box">
+      <div class="icon-box__icon">{{ partial "icon.html" .icon }}</div>
+      {{ with .lines }}
+        <h3>
+          {{ range $i, $line := . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}
+        </h3>
+      {{ end }}
+      {{ with .text }}<p>{{ . }}</p>{{ end }}
+    </article>
+  {{ end }}
+</div>

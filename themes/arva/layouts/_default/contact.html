@@ -1,0 +1,20 @@
+{{ define "main" }}
+{{ partial "hero.html" (dict "image" .Params.hero "lines" .Params.hero_lines "overlay" "#292047" "opacity" "0.4" "class" "hero--top") }}
+
+<section class="section">
+  <div class="wrap prose">
+    {{ .Content }}
+  </div>
+</section>
+
+<section class="band band--wash" style="background-image: url('{{ .Params.hero }}')">
+  <div class="band__overlay band__overlay--paper"></div>
+  <div class="wrap">
+    <h2>Ihmiset yhdistyksen takana</h2>
+    {{ partial "board.html" . }}
+    <h2>Ota yhteyttä:</h2>
+    <p>{{ hugo.Data.site.email_display }}</p>
+    <p>p. {{ hugo.Data.site.phone }}</p>
+  </div>
+</section>
+{{ end }}

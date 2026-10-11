@@ -1,0 +1,61 @@
+{{ define "main" }}
+{{ partial "hero.html" (dict "image" .Params.hero "lines" .Params.hero_lines "button" .Params.hero_button "overlay" "#ffffff" "opacity" "0.8" "class" "hero--light") }}
+
+<section class="section">
+  <div class="split wrap">
+    <div class="split__col prose">
+      <h2>{{ .Title }}</h2>
+      <div class="rule"></div>
+      {{ .Params.intro | markdownify }}
+      <p><strong>Unelmatehdas</strong><br>{{ .Params.project_email }}</p>
+    </div>
+    <div class="split__col">
+      {{ partial "facebook.html" (dict "href" .Params.facebook "height" 628) }}
+    </div>
+  </div>
+</section>
+
+<section class="band band--ink">
+  {{ partial "shape.html" "top" }}
+  <div class="wrap">
+    <h2 class="center">{{ .Params.support_title }}</h2>
+    {{ partial "icon-boxes.html" (dict "items" .Params.tiers) }}
+    <p class="center">
+      <a class="btn" href="{{ .Params.support_button.url }}">{{ .Params.support_button.text }}</a>
+    </p>
+    <details class="fold fold--on-dark">
+      <summary>Rahankeräysluvan tiedot</summary>
+      <div class="fold__body">{{ .Params.permit | markdownify }}</div>
+    </details>
+  </div>
+  {{ partial "shape.html" "bottom" }}
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="lead">{{ .Params.gallery_intro }}</h2>
+    {{ range .Params.galleries }}
+      <h2>{{ .title }}</h2>
+      <div class="carousel" data-carousel>
+        <button class="carousel__prev" type="button" aria-label="Edellinen">{{ partial "icon.html" "chevron-left" }}</button>
+        <div class="carousel__viewport">
+          <div class="carousel__track">
+            {{ range .images }}
+              <div class="carousel__slide">
+                <img src="{{ . }}" alt="">
+              </div>
+            {{ end }}
+          </div>
+        </div>
+        <button class="carousel__next" type="button" aria-label="Seuraava">{{ partial "icon.html" "chevron-right" }}</button>
+        <div class="carousel__dots"></div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+  {{ $js := resources.Get "js/carousel.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ end }}

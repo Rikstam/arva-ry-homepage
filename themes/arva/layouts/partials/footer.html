@@ -1,0 +1,32 @@
+{{ $site := hugo.Data.site }}
+{{ $phone := .Params.phone | default $site.phone }}
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>Yhteystiedot</h2>
+      <p>
+        {{ range $site.address }}
+          {{ . }}<br>
+        {{ end }}
+        puh. {{ $phone }}
+      </p>
+      <p>{{ $site.email_display }}</p>
+    </div>
+    <div class="footer-actions">
+      <a class="btn" href="{{ "/yhteys/" | relURL }}">
+        {{ partial "icon.html" "leaf" }}
+        <span>Liity jäseneksi</span>
+      </a>
+      <a class="btn" href="{{ $site.donate_url }}">
+        {{ partial "icon.html" "euro" }}
+        <span>Lahjoita yhdistykselle</span>
+      </a>
+    </div>
+    <div class="footer-facebook">
+      {{ partial "facebook.html" (dict "href" $site.facebook "height" 250) }}
+    </div>
+  </div>
+  <div class="wrap footer-copy">
+    <p>{{ $site.copyright }}</p>
+  </div>
+</footer>

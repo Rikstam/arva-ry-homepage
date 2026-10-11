@@ -1,0 +1,67 @@
+{{ define "main" }}
+<section class="hero hero--slogans" style="background-image: url('{{ .Params.hero_image }}')">
+  <div class="hero__overlay" style="background-color: #292047; opacity: 0.5"></div>
+  <div class="wrap hero__content">
+    <h1 class="slogans">
+      {{ range $i, $line := .Params.slogans }}
+        <span{{ if eq $i 0 }} class="is-first"{{ end }}>{{ $line }}</span>
+      {{ end }}
+    </h1>
+    {{ with .Params.hero_cta }}
+      <a class="btn" href="{{ .url }}">{{ .text }}</a>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    <h2>Yhdistyksen tarkoitus</h2>
+    <div class="rule"></div>
+    {{ .Content }}
+  </div>
+</section>
+
+<section class="band band--ink">
+  {{ partial "shape.html" "top" }}
+  <blockquote class="center-quote">
+    <p>{{ .Params.quote }}</p>
+    <footer><cite>{{ .Params.quote_author }}</cite></footer>
+  </blockquote>
+  {{ partial "shape.html" "bottom" }}
+</section>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <h2>{{ .Params.benefits_title }}</h2>
+  </div>
+</section>
+
+<section class="section section--after-title">
+  <div class="wrap">
+    {{ partial "icon-boxes.html" (dict "items" .Params.benefits) }}
+  </div>
+</section>
+
+<section class="band band--wash" style="background-image: url('{{ .Params.teaser.image }}')">
+  <div class="band__overlay band__overlay--light"></div>
+  <div class="wrap teaser">
+    <img class="teaser__logo" src="{{ .Params.teaser.logo }}" alt="Unelmatehdas">
+    <div class="prose">{{ .Params.teaser.text | markdownify }}</div>
+    <a class="btn btn--solid" href="{{ .Params.teaser.url }}">{{ .Params.teaser.button }}</a>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="wrap">
+    <h2>Yhteistyökumppanit</h2>
+  </div>
+</section>
+
+<section class="section section--after-title">
+  <div class="wrap partner-row">
+    {{ range hugo.Data.partners }}
+      <img src="{{ .image }}" alt="{{ .alt }}">
+    {{ end }}
+  </div>
+</section>
+{{ end }}
